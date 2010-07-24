@@ -1,0 +1,49 @@
+<html>
+	<head>
+		<title>Flic.kr short URL generator</title>
+		<script>
+			function intval (mixed_var, base) {
+			    if ( typeof mixed_var == 'boolean' ) {
+			        return mixed_var ? 1 : 0;
+			    } else if ( typeof mixed_var == 'string' ) {
+			        var tmp = parseInt(mixed_var, base || 10);
+			        return isNaN(tmp) || !isFinite(tmp) ? 0 : tmp;
+			    } else if ( typeof mixed_var == 'number' && isFinite(mixed_var) ) {
+			        return Math.floor(mixed_var);
+			    } else {
+			        return 0;
+			    }
+			}
+
+			function base58_encode(num) {
+				var alphabet = '123456789abcdefghijkmnopqrstuvwxyzABCDEFGHJKLMNPQRSTUVWXYZ';
+				var base_count = alphabet.length;
+				var encoded = '';
+				while (num >= base_count) {
+					var div = num / base_count;
+					var mod = num - (base_count * intval(div));
+					encoded = alphabet.charAt(mod) + encoded;
+					num = intval(div);
+				}
+				if (num) encoded = alphabet.charAt(num) + encoded;
+				return encoded;
+			}
+		
+			function setFlickrShortURL(shortURL) {
+				var el = document.getElementById('kr_url'); 
+				var url = 'http://flic.kr/p/' + shortURL;
+				el.href = url; 
+				el.innerHTML = url;
+			}
+		</script>
+	</head>
+	<body>
+		<p>
+			Flickr Photo ID: <input type="text" size="20" id="photoid" onChange="javascript: setFlickrShortURL(base58_encode(this.value));">
+			<input type="submit" value="Get URL!" onClick="javascript: return false;">
+		</p>
+		<p>
+			flic.kr URL: <a target="_blank" id="kr_url" href=""></a>
+		</p>
+	</body>
+</html>
