@@ -1,0 +1,12 @@
+<head>
+<script>
+window.addEventListener && window.addEventListener('keydown', function(e) {
+	this.keys ? this.keys.push(e.keyCode) : this.keys = [e.keyCode];
+	if(this.keys.toString().indexOf("38,38,40,40,37,39,37,39,66,65") >= 0) {
+		var audio = document.createElement("audio");
+		audio.src = "http://geek.thinkunique.org/wp-content/vid/tmnt.mp3";
+		audio.play();
+	} 
+}, true);
+</script>
+</head>
