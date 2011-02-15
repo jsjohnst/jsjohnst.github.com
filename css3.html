@@ -1,0 +1,184 @@
+<html>
+	<head>
+		<title>CSS3 Sample</title>
+		<style>
+			#wrap {
+				/* Only here to make the example layout */
+				position: absolute;
+				left: 33;
+				top: 33;
+				width: 573px;
+
+				/* This adds a grey gradient darker top left and lighter bottom right */
+				background-image: -webkit-gradient(
+				    linear,
+				    left top,
+				    right bottom,
+				    color-stop(0.2, rgb(216,216,216)),
+				    color-stop(0.6, rgb(229,230,230)),
+				    color-stop(0.8, rgb(245,245,245))
+				);
+				background-image: -moz-linear-gradient(
+				    left top,
+				    rgb(216,216,216) 20%,
+				    rgb(229,230,230) 60%,
+				    rgb(245,245,245) 80%
+				);
+
+				/* standard rounded corners */
+				border-radius: 4px;
+				-webkit-border-radius: 4px;
+				-moz-border-radius: 4px;
+
+				/* this adds a bit of an inner shadow */
+				box-shadow: inner 0 0 3px #333;
+				-moz-box-shadow: inset 0 0 3px #333;
+				-webkit-box-shadow: inset 0 0 3px #333;
+			}
+			
+			#c1 {
+				/* only needed for this example */
+				background-color: #391bd4;
+				width: 559px;
+				height: 191px;
+				margin: 7px;
+
+				/* same rounded corners we saw before */
+				border-radius: 6px;
+				-webkit-border-radius: 6px;
+				-moz-border-radius: 6px;
+
+				/* more pronounced, but same inner shadow we saw before */
+				box-shadow: inner 0 0 8px #333;
+				-moz-box-shadow: inset 0 0 8px #333;
+				-webkit-box-shadow: inset 0 0 8px #333;
+			}
+			
+			#c2 {
+				/* only needed for this example */
+				background-color: #f1f1f1;
+				color: #391bd4;
+				width: 559px;
+				height: 56px;
+				margin: 7px;
+
+				/* same rounded corners we saw before */
+				border-radius: 6px;
+				-webkit-border-radius: 6px;
+				-moz-border-radius: 6px;
+
+				/* another inner shadow, this time wide like #c1, but less dark because of the #999 color */
+				box-shadow: inner 0 0 8px #999;
+				-moz-box-shadow: inset 0 0 8px #999;
+				-webkit-box-shadow: inset 0 0 8px #999;
+			}
+			
+			#c2 span {
+				/* one trick to vertically center content (there are many others) */
+				height: 56px;
+				display: table-cell; 
+				vertical-align: middle;
+				
+				/* add the indent for the example */
+				padding-left: 20px;
+			}
+			
+			#avatar {
+				/* only needed for this example */
+				position: absolute;
+				left: 15px;
+				top: 65px;
+				
+				/* Adds the border around the image */
+				padding: 3px;
+				background-color: #6293ed;
+
+				/* adds a drop shadow */
+				-moz-box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+				-webkit-box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+				box-shadow: 3px 3px 3px rgba(0,0,0,0.5);
+			}
+
+			#avatar img {
+				/* gives the image a bit of an inset look sorta */
+				border: 1px solid #666;
+			}
+			
+			#b1:before {
+			 	/* general setup stuff needed */
+			    content: '';
+			    display: block;
+			    position: absolute;
+				
+				/* use this to adjust the arrow up and down the left side of the box */
+			    top: 12px;
+			
+				/* this controls how much of the arrow is exposed */
+				left: -5px;
+				
+				/* this controls how big the arrow is */
+			    width: 34px;
+			    height: 34px;
+			    
+				/* border and background color should match #b1 */
+				border: solid 1px #6293ed;
+			    background-color: #426ec0;
+
+				/* here is where most of the "magic" comes into play where we rotate the "box" */
+			    -moz-transform: rotate(45deg);
+			    -webkit-transform: rotate(45deg);
+			}
+			
+			#b1 {
+				/* for example purposes only */
+				position: absolute;
+				top: 65px;
+				right: 20px;
+				width: 464px;
+				height: 125px;
+
+				/* same rounded corners we saw before, if you change this, you must change in #b2 as well */
+				border-radius: 6px;
+				-webkit-border-radius: 6px;
+				-moz-border-radius: 6px;
+
+				/* make sure these colors match above and below! */
+				border: 1px solid #6293ed;
+				background-color: #426ec0;
+			}
+
+			#b2 {
+				/* this pops the div up on top of the arrow */
+				position: absolute;
+				
+				/* make sure we fill the full size of the parent */
+				width: 100%;
+				height: 100%;
+				
+				/* we need to preserve the rounded corners even though we don't have a border */
+				/* if we don't, then the corners will overshadow the box below */
+				border-radius: 6px;
+				-webkit-border-radius: 6px;
+				-moz-border-radius: 6px;
+
+				/* this color must match the above */
+				background-color: #426ec0;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="wrap">
+			<div id="c1">
+				<div id="avatar"><img src="https://si0.twimg.com/profile_images/275506709/n820040166_3558593_6616_bigger.jpg" width="48" height="48" /></div>
+				<div id="b1">
+					<div id="b2">
+						&nbsp; /* content for inside the bubble goes here */
+					</div>
+				</div>
+			</div>
+			<div id="c2">
+				<span>Lorem ipsum dollar...</span>
+			</div>
+		</div>
+	</body>
+</html>
