@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>CSS3 Sample</title>
+		<title>CSS2/3 Sample</title>
 		<style>
 			#wrap {
 				/* Only here to make the example layout */
@@ -127,6 +127,11 @@
 				/* here is where most of the "magic" comes into play where we rotate the "box" */
 			    -moz-transform: rotate(45deg);
 			    -webkit-transform: rotate(45deg);
+			
+				/* here's where the rest of the "magic" comes from */
+				/* using this, we are able to clip the box so it doesn't overlap into the main box */
+				/* if you adjust any of the sizes of the arrow, you will likely need to tweak here */
+				clip: rect(19px, 33px, 34px, 0px);
 			}
 			
 			#b1 {
@@ -137,31 +142,13 @@
 				width: 464px;
 				height: 125px;
 
-				/* same rounded corners we saw before, if you change this, you must change in #b2 as well */
+				/* same rounded corners we saw before */
 				border-radius: 6px;
 				-webkit-border-radius: 6px;
 				-moz-border-radius: 6px;
 
-				/* make sure these colors match above and below! */
+				/* make sure these colors match above! */
 				border: 1px solid #6293ed;
-				background-color: #426ec0;
-			}
-
-			#b2 {
-				/* this pops the div up on top of the arrow */
-				position: absolute;
-				
-				/* make sure we fill the full size of the parent */
-				width: 100%;
-				height: 100%;
-				
-				/* we need to preserve the rounded corners even though we don't have a border */
-				/* if we don't, then the corners will overshadow the box below */
-				border-radius: 6px;
-				-webkit-border-radius: 6px;
-				-moz-border-radius: 6px;
-
-				/* this color must match the above */
 				background-color: #426ec0;
 			}
 		</style>
@@ -171,9 +158,7 @@
 			<div id="c1">
 				<div id="avatar"><img src="https://si0.twimg.com/profile_images/275506709/n820040166_3558593_6616_bigger.jpg" width="48" height="48" /></div>
 				<div id="b1">
-					<div id="b2">
-						&nbsp; <!-- content for inside the bubble goes here -->
-					</div>
+					Hello World!
 				</div>
 			</div>
 			<div id="c2">
