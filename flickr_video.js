@@ -1,6 +1,16 @@
 // This is suggested by Apple for Safari extensions
 if(window.top === window) {
 	(function() {
+		if(document.domain != "www.flickr.com") {
+			alert("Only supported on www.flickr.com");
+			return;
+		}
+
+		if(window.navigator.userAgent.indexOf("AppleWebKit") == -1 ||
+		     window.navigator.vendor.indexOf("Apple") == -1) {
+			alert("This is only supported on Safari. If it works, you are lucky!");
+		}
+
 		// First we check to even see if we are needed or not
 		// If you have Flash, I don't bother
 		var flash_notice = document.getElementsByClassName("flash-notice")[0];
