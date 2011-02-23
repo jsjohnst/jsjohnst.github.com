@@ -132,7 +132,7 @@ if(window.top === window) {
 							
 							video_wrapper.appendChild(node);
 						} else {
-							alert("The H.264 Flickr Video player received an error:\n" + message + "\n\nIf this issue persists, please file a bug here:\nhttp://github.com/jsjohnst/SafariEnhancements/issues\nProviding the URL and this error code: " + e.target.error.code;)
+							alert("The H.264 Flickr Video player received an error:\n" + message + "\n\nIf this issue persists, please file a bug here:\nhttp://github.com/jsjohnst/SafariEnhancements/issues\nProviding the URL and this error code: " + e.target.error.code);
 						}
 					}
 				});
