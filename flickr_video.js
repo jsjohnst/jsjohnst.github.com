@@ -27,6 +27,7 @@ if(window.top === window) {
 		var id = null;
 		var secret = null;
 		var poster = null;
+		var flash_notice_dom = null;
 
 		// Scrapping the link tags might not be the best approach
 		// but it works and has no external dependencies.
@@ -80,6 +81,9 @@ if(window.top === window) {
 			// make sure we were able to grab the video wrapper and we have a video to play
 			if(video_wrapper && video_src) {
 
+				// save off the flash notice for later!
+				flash_notice_dom = video_wrapper.firstChild;
+				
 				// get rid of the nasty "You need Flash!" b/s
 				while (video_wrapper.hasChildNodes()) {
 					video_wrapper.removeChild(video_wrapper.firstChild);
@@ -99,21 +103,38 @@ if(window.top === window) {
 				video.addEventListener("error", function(e) {
 					switch (e.target.error.code) {
 						case e.target.error.MEDIA_ERR_ABORTED:
-					       // ignore
-					       break;
-					     case e.target.error.MEDIA_ERR_NETWORK:
-					       alert('A network error occurred during playback, try again?\nPlease report this issue if it is persistent! Code #2');
-					       break;
-					     case e.target.error.MEDIA_ERR_DECODE:
-					       alert('The Flickr video stream is corrupted or unplayable.\nPlease report this issue! Code #3');
-					       break;
-					     case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
-					       alert('The Flickr video stream is corrupted or unplayable.\nPlease report this issue! Code #4');
-					       break;
-					     default:
-					       alert('An unknown error occurred.');
-					       break;
-					   }
+					       	// ignore
+						   	var message = null;
+					       	break;
+					    case e.target.error.MEDIA_ERR_NETWORK:
+						   	var message = 'A network error occurred during playback, try again?';
+					       	break;
+					    case e.target.error.MEDIA_ERR_DECODE:
+						case e.target.error.MEDIA_ERR_SRC_NOT_SUPPORTED:
+							var message = 'The Flickr video stream is corrupted or unplayable.';
+					       	break;
+					    default:
+					       	var message = 'An unknown error occurred.';
+					       	break;
+					}
+					if(message) {
+						if(flash_notice_dom) {
+							// yank our stuff back out!
+							while (video_wrapper.hasChildNodes()) {
+								video_wrapper.removeChild(video_wrapper.firstChild);
+							}
+							
+							video_wrapper.appendChild(flash_notice_dom);
+							
+							var node = document.createElement("div");
+							div.innerHTML = "The H.264 Flickr Video player received an error:<br>" + message + "<br>If this issue persists, please file a bug here:<br><a href='http://github.com/jsjohnst/SafariEnhancements/issues'>http://github.com/jsjohnst/SafariEnhancements/issues</a><br>Providing the URL and this error code: " + e.target.error.code;
+							div.style["margin-top"] = "10px";
+							
+							video_wrapper.appendChild(node);
+						} else {
+							alert("The H.264 Flickr Video player received an error:\n" + message + "\n\nIf this issue persists, please file a bug here:\nhttp://github.com/jsjohnst/SafariEnhancements/issues\nProviding the URL and this error code: " + e.target.error.code;)
+						}
+					}
 				});
 
 				// now that we are all set, append it and make things be awesome!
