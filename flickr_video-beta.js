@@ -28,6 +28,7 @@ if(window.top === window) {
 		var secret = null;
 		var poster = null;
 		var flash_notice_dom = null;
+		var attribution_dom = null;
 
 		// Scrapping the link tags might not be the best approach
 		// but it works and has no external dependencies.
@@ -127,8 +128,12 @@ if(window.top === window) {
 							video_wrapper.appendChild(flash_notice_dom);
 							
 							var div = document.createElement("div");
-							div.innerHTML = "The H.264 Flickr Video player received an error:<br>" + message + "<br>If this issue persists, please file a bug here:<br><a href='http://github.com/jsjohnst/SafariEnhancements/issues'>http://github.com/jsjohnst/SafariEnhancements/issues</a><br>Providing the URL and this error code: " + e.target.error.code;
-							div.style["margin-top"] = "10px";
+							div.innerHTML = "The H.264 Flickr Video player received an error: <i>" + message + "</i><br>If this issue persists, please file a bug here: <a href='http://github.com/jsjohnst/SafariEnhancements/issues'>http://github.com/jsjohnst/SafariEnhancements/issues</a><br>Providing the URL to this video and error code: " + e.target.error.code;
+							div.style.position = "absolute";
+							div.style.bottom = "10px";
+							div.style.color = "#fff";
+							div.style.width = "100%";
+							div.style["text-align"] = "center";
 							
 							video_wrapper.appendChild(div);
 						} else {
@@ -141,7 +146,7 @@ if(window.top === window) {
 				video_wrapper.appendChild(video);
 				
 				// If your window is big enough, I'm going to put in a little advert for myself... :)
-				if(window.outerWidth >= 1240) {
+				if(window.outerWidth >= 1240 && !attribution_dom) {
 					// Create the div for the plug and position it
 					var node = document.createElement("div");
 					node.style.width = "100px";
@@ -160,6 +165,9 @@ if(window.top === window) {
 
 					// now that we made the div, stick it in the page!
 					document.body.appendChild(node);
+					
+					// save a reference for later so we don't add twice
+					attribution_dom = node;
 				}			
 			}
 		}
