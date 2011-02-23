@@ -126,11 +126,11 @@ if(window.top === window) {
 							
 							video_wrapper.appendChild(flash_notice_dom);
 							
-							var node = document.createElement("div");
+							var div = document.createElement("div");
 							div.innerHTML = "The H.264 Flickr Video player received an error:<br>" + message + "<br>If this issue persists, please file a bug here:<br><a href='http://github.com/jsjohnst/SafariEnhancements/issues'>http://github.com/jsjohnst/SafariEnhancements/issues</a><br>Providing the URL and this error code: " + e.target.error.code;
 							div.style["margin-top"] = "10px";
 							
-							video_wrapper.appendChild(node);
+							video_wrapper.appendChild(div);
 						} else {
 							alert("The H.264 Flickr Video player received an error:\n" + message + "\n\nIf this issue persists, please file a bug here:\nhttp://github.com/jsjohnst/SafariEnhancements/issues\nProviding the URL and this error code: " + e.target.error.code);
 						}
